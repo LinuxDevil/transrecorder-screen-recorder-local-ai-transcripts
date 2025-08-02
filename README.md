@@ -43,10 +43,10 @@ Before running this application, you'll need to install some dependencies:
 
 The easiest way to get started is to download the pre-built binaries:
 
-1. **Go to the [Releases page](https://github.com/your-username/loushrecorder/releases)**
+1. **Go to the [Releases page](https://github.com/LinuxDevil/MeetingVideo-Transrecorder/releases)**
 2. **Download the appropriate installer for your platform:**
-   - **Windows**: `loushrecorder-1.0.0-setup.exe`
-   - **macOS**: `loushrecorder-1.0.0.dmg`
+   - **Windows**: `meetingvideo-transrecorder-1.0.0-setup.exe`
+   - **macOS**: `meetingvideo-transrecorder-1.0.0.dmg`
 3. **Install and run the application**
 
 ### Option 2: Build from Source
@@ -56,8 +56,8 @@ If you prefer to build from source or need the latest development version:
 #### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd loushrecorder
+git clone https://github.com/LinuxDevil/MeetingVideo-Transrecorder
+cd meetingvideo-transrecorder
 ```
 
 ### 2. Install Dependencies
@@ -300,7 +300,7 @@ This will check and install required dependencies automatically.
 ## Project Structure
 
 ```
-loushrecorder/
+meetingvideo-transrecorder/
 ├── src/
 │   ├── main/           # Electron main process
 │   │   ├── handlers/   # IPC handlers
@@ -416,7 +416,7 @@ git push origin v1.0.1
 
 #### For Manual Builds
 
-1. **Go to the [Actions tab](https://github.com/your-username/loushrecorder/actions)**
+1. **Go to the [Actions tab](https://github.com/LinuxDevil/MeetingVideo-Transrecorder/actions)**
 2. **Click "Build Artifacts"**
 3. **Click "Run workflow"**
 4. **Select branch and click "Run workflow"**

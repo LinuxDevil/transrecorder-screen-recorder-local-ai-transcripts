@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Setup script for LoushRecorder audio extraction dependencies
+Setup script for MeetingVideo-Transrecorder audio extraction dependencies
 """
 
 import subprocess
@@ -68,7 +68,7 @@ def test_speech_recognition():
 
 def main():
     """Main setup function"""
-    print("🔧 Setting up LoushRecorder audio extraction...")
+    print("🔧 Setting up MeetingVideo-Transrecorder audio extraction...")
     print("=" * 50)
 
     if not check_python_version():

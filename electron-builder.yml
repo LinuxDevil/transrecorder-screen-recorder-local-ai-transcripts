@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: loushrecorder
+productName: meetingvideo-transrecorder
 directories:
   buildResources: build
 files:
@@ -12,7 +12,7 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: loushrecorder
+  executableName: meetingvideo-transrecorder
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}

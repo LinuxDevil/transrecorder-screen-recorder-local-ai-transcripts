@@ -40,7 +40,7 @@ echo    2. Create a GitHub release
 echo    3. Upload all artifacts to the release
 echo.
 echo 📋 You can monitor the progress at:
-echo    https://github.com/your-username/loushrecorder/actions
+echo    https://github.com/your-username/meetingvideo-transrecorder/actions
 echo.
 echo 📦 Once complete, users can download from:
-echo    https://github.com/your-username/loushrecorder/releases
+echo    https://github.com/your-username/meetingvideo-transrecorder/releases
