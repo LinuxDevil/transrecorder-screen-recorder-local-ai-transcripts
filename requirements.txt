@@ -1,0 +1,5 @@
+openai-whisper>=20231117
+SpeechRecognition>=3.10.0
+pydub>=0.25.1
+torch>=2.0.0
+numpy>=1.24.0

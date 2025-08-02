@@ -1,0 +1,14 @@
+node_modules
+dist
+out
+.DS_Store
+.eslintcache
+*.log*
+.vscode
+build
+.idea
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

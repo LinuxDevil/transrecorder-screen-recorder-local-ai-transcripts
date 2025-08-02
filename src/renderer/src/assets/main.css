@@ -1,0 +1,226 @@
+@import './base.css';
+@import 'tailwindcss';
+
+.app-container {
+  @apply min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6;
+}
+
+.app-content {
+  @apply max-w-6xl mx-auto space-y-6;
+}
+
+.header-container {
+  @apply text-center space-y-2;
+}
+
+.header-title {
+  @apply text-3xl font-bold text-slate-900;
+}
+
+.header-subtitle {
+  @apply text-slate-600;
+}
+
+.recording-status {
+  @apply flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-lg;
+}
+
+.recording-indicator {
+  @apply w-3 h-3 bg-red-500 rounded-full animate-pulse;
+}
+
+.recording-text {
+  @apply text-red-800 font-medium;
+}
+
+.recording-badge {
+  @apply ml-auto px-2 py-1 text-xs font-medium text-white bg-red-600 rounded-full;
+}
+
+.status-message {
+  @apply flex items-start gap-3 p-4 rounded-lg border;
+}
+
+.status-message-success {
+  @apply border-green-200 bg-green-50 text-green-800;
+}
+
+.status-message-error {
+  @apply border-red-200 bg-red-50 text-red-800;
+}
+
+.status-message-loading {
+  @apply border-blue-200 bg-blue-50 text-blue-800;
+}
+
+.status-message-info {
+  @apply border-gray-200 bg-gray-50 text-gray-800;
+}
+
+.status-message-text {
+  @apply text-sm whitespace-pre-line;
+}
+
+.video-grid {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-6;
+}
+
+.video-card {
+  @apply bg-white rounded-lg shadow-sm border border-slate-200;
+}
+
+.video-card-header {
+  @apply p-6 border-b border-slate-200;
+}
+
+.video-card-title {
+  @apply flex items-center gap-2 mb-2;
+}
+
+.video-card-heading {
+  @apply text-xl font-semibold text-slate-900;
+}
+
+.video-card-description {
+  @apply text-slate-600 text-sm;
+}
+
+.video-card-content {
+  @apply p-6;
+}
+
+.video-container {
+  @apply relative;
+}
+
+.video-element {
+  @apply w-full aspect-video bg-slate-900 rounded-lg border-2 border-slate-200;
+}
+
+.video-element-recorded {
+  @apply w-full aspect-video rounded-lg border-2 border-slate-200;
+}
+
+.video-placeholder {
+  @apply absolute inset-0 flex items-center justify-center bg-slate-900/50 rounded-lg;
+}
+
+.video-placeholder-content {
+  @apply text-center text-white;
+}
+
+.video-placeholder-icon {
+  @apply w-12 h-12 mx-auto mb-2 opacity-50;
+}
+
+.video-placeholder-text {
+  @apply text-sm opacity-75;
+}
+
+.video-empty {
+  @apply w-full aspect-video bg-slate-100 rounded-lg border-2 border-dashed border-slate-300 flex items-center justify-center;
+}
+
+.video-empty-content {
+  @apply text-center text-slate-500;
+}
+
+.video-empty-icon {
+  @apply w-12 h-12 mx-auto mb-2 opacity-50;
+}
+
+.video-empty-text {
+  @apply text-sm;
+}
+
+.video-empty-subtext {
+  @apply text-xs opacity-75;
+}
+
+.controls-card {
+  @apply bg-white rounded-lg shadow-sm border border-slate-200;
+}
+
+.controls-header {
+  @apply p-6 border-b border-slate-200;
+}
+
+.controls-title {
+  @apply flex items-center gap-2 mb-2;
+}
+
+.controls-icon {
+  @apply w-5 h-5;
+}
+
+.controls-heading {
+  @apply text-xl font-semibold text-slate-900;
+}
+
+.controls-description {
+  @apply text-slate-600 text-sm;
+}
+
+.controls-content {
+  @apply p-6 space-y-6;
+}
+
+.controls-section {
+  @apply space-y-3;
+}
+
+.controls-label {
+  @apply text-sm font-medium text-slate-700;
+}
+
+.controls-options {
+  @apply flex flex-wrap gap-4;
+}
+
+.controls-option {
+  @apply flex items-center gap-2 cursor-pointer;
+}
+
+.controls-radio {
+  @apply w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2;
+}
+
+.controls-option-content {
+  @apply flex items-center gap-2 text-sm font-normal text-slate-700;
+}
+
+.controls-divider {
+  @apply border-slate-200;
+}
+
+.controls-buttons {
+  @apply flex flex-wrap gap-3;
+}
+
+.btn {
+  @apply inline-flex items-center px-6 py-3 text-sm font-medium rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.btn-primary {
+  @apply text-white bg-blue-600 border border-transparent hover:bg-blue-700 focus:ring-blue-500;
+}
+
+.btn-secondary {
+  @apply text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 focus:ring-blue-500;
+}
+
+.btn-success {
+  @apply text-green-700 bg-green-50 border border-green-200 hover:bg-green-100 focus:ring-green-500;
+}
+
+.btn-danger {
+  @apply text-white bg-red-600 border border-transparent hover:bg-red-700 focus:ring-red-500;
+}
+
+.btn-icon {
+  @apply ml-2;
+}
