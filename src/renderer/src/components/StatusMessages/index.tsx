@@ -1,6 +1,6 @@
 import React from 'react'
-import { getMessageType, getMessageClasses } from '../utils/ui.utils'
-import { CheckCircleIcon, AlertCircleIcon, LoaderIcon } from './icons'
+import { getMessageType, getMessageClasses } from '../../utils/ui.utils'
+import { AlertCircleIcon, CheckCircleIcon, LoaderIcon } from '../icons'
 
 interface StatusMessagesProps {
   saveMessage: string

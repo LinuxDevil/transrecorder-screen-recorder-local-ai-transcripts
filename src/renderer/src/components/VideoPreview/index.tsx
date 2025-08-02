@@ -1,5 +1,5 @@
 import React from 'react'
-import { MonitorIcon, VideoIcon } from './icons'
+import { VideoIcon, MonitorIcon } from '../icons'
 
 interface VideoPreviewProps {
   stream: MediaStream | null

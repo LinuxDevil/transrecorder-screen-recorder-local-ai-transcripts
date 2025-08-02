@@ -1,8 +1,8 @@
 import React from 'react'
-import { RecordingType, DesktopSource } from '../types'
-import { getRecordingTypeIcon, getRecordingTypeLabel } from '../utils/recording.utils'
-import { getButtonClasses } from '../utils/ui.utils'
-import { PlayIcon, SquareIcon, DownloadIcon, FileTextIcon, LoaderIcon, VideoIcon } from './icons'
+import { RecordingType, DesktopSource } from '../../types'
+import { getRecordingTypeIcon, getRecordingTypeLabel } from '../../utils/recording.utils'
+import { getButtonClasses } from '../../utils/ui.utils'
+import { PlayIcon, SquareIcon, DownloadIcon, FileTextIcon, LoaderIcon, VideoIcon } from '../icons'
 
 interface RecordingControlsProps {
   isRecording: boolean

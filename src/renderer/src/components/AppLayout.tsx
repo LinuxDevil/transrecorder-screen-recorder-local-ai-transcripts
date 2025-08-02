@@ -1,10 +1,10 @@
 import React from 'react'
-import { Header } from './Header'
-import { RecordingControls } from './RecordingControls'
-import { StatusMessages } from './StatusMessages'
-import { RecordingStatus } from './RecordingStatus'
-import { VideoPreview } from './VideoPreview'
-import { ScreenSelector } from './ScreenSelector'
+import { Header } from './Header/index'
+import { RecordingControls } from './RecordingControls/index'
+import { StatusMessages } from './StatusMessages/index'
+import { RecordingStatus } from './RecordingStatus/index'
+import { VideoPreview } from './VideoPreview/index'
+import { ScreenSelector } from './ScreenSelector/index'
 import { RecordingType, DesktopSource } from '../types'
 
 interface AppLayoutProps {

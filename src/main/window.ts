@@ -17,8 +17,15 @@ export function createWindow(): BrowserWindow {
       preload: join(__dirname, '../preload/preload.js'),
       sandbox: false,
       contextIsolation: true,
-      nodeIntegration: false
+      nodeIntegration: false,
+      webSecurity: false,
+      allowRunningInsecureContent: true
     }
+  })
+
+  mainWindow.webContents.session.setPermissionRequestHandler((_, permission, callback) => {
+    console.log('Permission requested:', permission)
+    callback(true)
   })
 
   mainWindow.on('ready-to-show', () => {
@@ -30,8 +37,6 @@ export function createWindow(): BrowserWindow {
     return { action: 'deny' }
   })
 
-  // HMR for renderer base on electron-vite cli.
-  // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
