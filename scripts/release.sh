@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Release script for Screen Recorder
+# Release script for Meeting Video Transrecorder
 # Usage: ./scripts/release.sh <version>
 # Example: ./scripts/release.sh 1.0.1
 
@@ -40,7 +40,7 @@ echo "   2. Create a GitHub release"
 echo "   3. Upload all artifacts to the release"
 echo ""
 echo "📋 You can monitor the progress at:"
-echo "   https://github.com/your-username/meetingvideo-transrecorder/actions"
+echo "   https://github.com/LinuxDevil/MeetingVideo-Transrecorder/actions"
 echo ""
 echo "📦 Once complete, users can download from:"
-echo "   https://github.com/your-username/meetingvideo-transrecorder/releases"
+echo "   https://github.com/LinuxDevil/MeetingVideo-Transrecorder/releases"

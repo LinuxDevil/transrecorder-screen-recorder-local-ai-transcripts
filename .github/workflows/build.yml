@@ -46,13 +46,13 @@ jobs:
           brew install ffmpeg
           echo "FFmpeg installed successfully"
 
-      - name: Build application
-        run: |
-          if [ "${{ matrix.os }}" = "windows-latest" ]; then
-            npm run build:win
-          else
-            npm run build:mac
-          fi
+      - name: Build Windows application
+        if: matrix.os == 'windows-latest'
+        run: npm run build:win
+
+      - name: Build macOS application
+        if: matrix.os == 'macos-latest'
+        run: npm run build:mac
 
       - name: Upload Windows artifacts
         if: matrix.os == 'windows-latest'

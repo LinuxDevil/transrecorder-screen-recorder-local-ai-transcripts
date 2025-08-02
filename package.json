@@ -1,10 +1,10 @@
 {
   "name": "meetingvideo-transrecorder",
   "version": "1.0.0",
-  "description": "An Electron application with React and TypeScript",
+  "description": "A powerful desktop screen recording application with AI-powered transcript generation",
   "main": "./out/main/index.js",
-  "author": "example.com",
-  "homepage": "https://electron-vite.org",
+  "author": "LinuxDevil",
+  "homepage": "https://github.com/LinuxDevil/MeetingVideo-Transrecorder",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint --cache .",
