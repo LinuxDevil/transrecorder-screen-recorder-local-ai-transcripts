@@ -1,28 +1,76 @@
 import { join } from 'path'
 import { existsSync } from 'fs'
 import { spawn } from 'child_process'
+import { app } from 'electron'
 import { PythonScriptResult } from '../types'
 import { generateFallbackTranscript } from './file.utils'
+
+/**
+ * Find available Python command
+ */
+function findPythonCommand(): Promise<string | null> {
+  const commands = ['python3', 'python', 'py']
+  
+  return new Promise((resolve) => {
+    let index = 0
+    
+    function tryNext() {
+      if (index >= commands.length) {
+        resolve(null)
+        return
+      }
+      
+      const cmd = commands[index++]
+      const testProcess = spawn(cmd, ['--version'], { stdio: 'pipe' })
+      
+      testProcess.on('close', (code) => {
+        if (code === 0) {
+          console.log(`Found Python command: ${cmd}`)
+          resolve(cmd)
+        } else {
+          tryNext()
+        }
+      })
+      
+      testProcess.on('error', () => {
+        tryNext()
+      })
+    }
+    
+    tryNext()
+  })
+}
 
 /**
  * Extract transcript from video using Python script
  */
 export async function extractTranscriptFromVideo(videoPath: string): Promise<string> {
-  return new Promise((resolve) => {
+  return new Promise(async (resolve) => {
     try {
       console.log('Running Python script to extract audio and transcribe...')
       console.log('Video path:', videoPath)
 
+      // Get the app path for both development and packaged environments
+      const appPath = app.isPackaged ? process.resourcesPath : process.cwd()
+      
       const possiblePaths = [
-        join(__dirname, '../../../audio_extractor.py'),
+        // For packaged app: resources/audio_extractor.py
+        join(appPath, 'audio_extractor.py'),
+        // For development: current working directory
         join(process.cwd(), 'audio_extractor.py'),
+        // Relative to main process directory
+        join(__dirname, '../../../audio_extractor.py'),
+        // Try current directory as fallback
         'audio_extractor.py'
       ]
 
+      console.log('App is packaged:', app.isPackaged)
+      console.log('App path:', appPath)
       console.log('Possible script paths:', possiblePaths)
 
       let scriptPath: string | null = null
       for (const path of possiblePaths) {
+        console.log('Checking path:', path, 'exists:', existsSync(path))
         if (existsSync(path)) {
           scriptPath = path
           console.log('Found script at:', scriptPath)
@@ -31,13 +79,22 @@ export async function extractTranscriptFromVideo(videoPath: string): Promise<str
       }
 
       if (!scriptPath) {
-        console.log('No script found, using fallback')
+        console.log('No script found at any of the expected paths, using fallback')
         resolve(generateFallbackTranscript(videoPath))
         return
       }
 
-      console.log('Spawning Python process with:', scriptPath, videoPath)
-      const pythonProcess = spawn('python', [scriptPath, videoPath])
+      // Find available Python command
+      const pythonCommand = await findPythonCommand()
+      
+      if (!pythonCommand) {
+        console.log('No Python command found, using fallback')
+        resolve(generateFallbackTranscript(videoPath))
+        return
+      }
+      
+      console.log('Spawning Python process with:', pythonCommand, scriptPath, videoPath)
+      const pythonProcess = spawn(pythonCommand, [scriptPath, videoPath])
 
       let stdout = ''
       let stderr = ''

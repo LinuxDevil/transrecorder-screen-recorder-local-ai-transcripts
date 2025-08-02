@@ -10,9 +10,13 @@ files:
   - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
   - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
   - 'out/**/*'
-  - 'audio_extractor.py'
-  - 'requirements.txt'
-  - 'setup.py'
+extraResources:
+  - from: 'audio_extractor.py'
+    to: 'audio_extractor.py'
+  - from: 'requirements.txt'
+    to: 'requirements.txt'
+  - from: 'setup.py'
+    to: 'setup.py'
 asarUnpack:
   - resources/**
 win:
