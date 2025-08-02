@@ -11,6 +11,7 @@ export async function extractTranscriptFromVideo(videoPath: string): Promise<str
   return new Promise((resolve) => {
     try {
       console.log('Running Python script to extract audio and transcribe...')
+      console.log('Video path:', videoPath)
 
       const possiblePaths = [
         join(__dirname, '../../../audio_extractor.py'),
@@ -18,19 +19,24 @@ export async function extractTranscriptFromVideo(videoPath: string): Promise<str
         'audio_extractor.py'
       ]
 
+      console.log('Possible script paths:', possiblePaths)
+
       let scriptPath: string | null = null
       for (const path of possiblePaths) {
         if (existsSync(path)) {
           scriptPath = path
+          console.log('Found script at:', scriptPath)
           break
         }
       }
 
       if (!scriptPath) {
+        console.log('No script found, using fallback')
         resolve(generateFallbackTranscript(videoPath))
         return
       }
 
+      console.log('Spawning Python process with:', scriptPath, videoPath)
       const pythonProcess = spawn('python', [scriptPath, videoPath])
 
       let stdout = ''
@@ -38,13 +44,19 @@ export async function extractTranscriptFromVideo(videoPath: string): Promise<str
 
       pythonProcess.stdout.on('data', (data) => {
         stdout += data.toString()
+        console.log('Python stdout:', data.toString())
       })
 
       pythonProcess.stderr.on('data', (data) => {
         stderr += data.toString()
+        console.log('Python stderr:', data.toString())
       })
 
       pythonProcess.on('close', (code) => {
+        console.log('Python process closed with code:', code)
+        console.log('Final stdout:', stdout)
+        console.log('Final stderr:', stderr)
+
         if (code === 0) {
           try {
             const result: PythonScriptResult = JSON.parse(stdout)
@@ -54,6 +66,11 @@ export async function extractTranscriptFromVideo(videoPath: string): Promise<str
             if (!transcript) {
               console.warn('No transcript generated, using fallback')
               transcript = generateFallbackTranscript(videoPath)
+            } else {
+              console.log(
+                'Successfully extracted transcript:',
+                transcript.substring(0, 100) + '...'
+              )
             }
 
             resolve(transcript)
