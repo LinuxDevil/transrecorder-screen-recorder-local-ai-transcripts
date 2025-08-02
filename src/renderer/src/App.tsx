@@ -15,7 +15,11 @@ export default function App(): React.JSX.Element {
     hasVideo,
     videoRef,
     previewVideoRef,
+    availableScreens,
+    selectedScreen,
     setRecordingType,
+    setSelectedScreen,
+    getAvailableScreens,
     startRecording,
     stopRecording,
     downloadVideo,
@@ -35,7 +39,11 @@ export default function App(): React.JSX.Element {
       videoRef={videoRef}
       stream={stream}
       recordedVideo={recordedVideo}
+      availableScreens={availableScreens}
+      selectedScreen={selectedScreen}
       onRecordingTypeChange={setRecordingType}
+      onScreenSelect={setSelectedScreen}
+      onRefreshScreens={getAvailableScreens}
       onStartRecording={startRecording}
       onStopRecording={stopRecording}
       onDownloadVideo={downloadVideo}

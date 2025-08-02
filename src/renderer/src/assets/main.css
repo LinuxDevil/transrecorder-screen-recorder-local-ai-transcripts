@@ -224,3 +224,75 @@
 .btn-icon {
   @apply ml-2;
 }
+
+.screen-selector-card {
+  @apply bg-white rounded-lg shadow-sm border border-slate-200;
+}
+
+.screen-selector-header {
+  @apply p-6 border-b border-slate-200 flex items-center justify-between;
+}
+
+.screen-selector-title {
+  @apply flex items-center gap-2;
+}
+
+.screen-selector-icon {
+  @apply w-5 h-5;
+}
+
+.screen-selector-heading {
+  @apply text-xl font-semibold text-slate-900;
+}
+
+.screen-selector-content {
+  @apply p-6;
+}
+
+.screen-selector-empty {
+  @apply text-center py-8;
+}
+
+.screen-selector-empty-text {
+  @apply text-slate-600 text-sm;
+}
+
+.screen-selector-list {
+  @apply space-y-3;
+}
+
+.screen-selector-option {
+  @apply flex items-start gap-3 p-4 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors;
+}
+
+.screen-selector-option:hover {
+  @apply border-slate-300;
+}
+
+.screen-selector-radio {
+  @apply w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 mt-1;
+}
+
+.screen-selector-option-content {
+  @apply flex-1 flex items-center justify-between;
+}
+
+.screen-selector-option-info {
+  @apply flex flex-col gap-1;
+}
+
+.screen-selector-option-name {
+  @apply text-sm font-medium text-slate-900;
+}
+
+.screen-selector-option-id {
+  @apply text-xs text-slate-500;
+}
+
+.screen-selector-thumbnail {
+  @apply w-16 h-12 rounded border border-slate-200 overflow-hidden;
+}
+
+.screen-selector-thumbnail-img {
+  @apply w-full h-full object-cover;
+}

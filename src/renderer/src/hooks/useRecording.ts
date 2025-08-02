@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from 'react'
-import { RecordingType, DesktopCaptureConstraints } from '../types'
+import { useState, useRef, useEffect, useCallback } from 'react'
+import { RecordingType, DesktopCaptureConstraints, DesktopSource } from '../types'
 import {
   generateFilename,
   generateTranscriptFilename,
@@ -18,7 +18,11 @@ interface UseRecordingReturn {
   hasVideo: boolean
   videoRef: React.RefObject<HTMLVideoElement | null>
   previewVideoRef: React.RefObject<HTMLVideoElement | null>
+  availableScreens: DesktopSource[]
+  selectedScreen: DesktopSource | null
   setRecordingType: (type: RecordingType) => void
+  setSelectedScreen: (screen: DesktopSource | null) => void
+  getAvailableScreens: () => Promise<void>
   startRecording: () => Promise<void>
   stopRecording: () => void
   downloadVideo: () => Promise<void>
@@ -35,6 +39,8 @@ export const useRecording = (): UseRecordingReturn => {
   const [saveMessage, setSaveMessage] = useState<string>('')
   const [transcriptMessage, setTranscriptMessage] = useState<string>('')
   const [recordingType, setRecordingType] = useState<RecordingType>(RecordingType.VIDEO)
+  const [availableScreens, setAvailableScreens] = useState<DesktopSource[]>([])
+  const [selectedScreen, setSelectedScreen] = useState<DesktopSource | null>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const chunksRef = useRef<Blob[]>([])
   const currentBlobRef = useRef<Blob | null>(null)
@@ -47,7 +53,7 @@ export const useRecording = (): UseRecordingReturn => {
     }
   }, [stream])
 
-  const startRecording = async (): Promise<void> => {
+  const getAvailableScreens = useCallback(async (): Promise<void> => {
     if (!window.electronAPI) {
       console.error('electronAPI is not available.')
       return
@@ -55,22 +61,44 @@ export const useRecording = (): UseRecordingReturn => {
 
     try {
       const sources = await window.electronAPI.getDesktopSources()
-      if (!sources || sources.length === 0) {
-        throw new Error('No desktop sources found')
+      if (sources && sources.length > 0) {
+        setAvailableScreens(sources)
+        if (!selectedScreen && sources.length > 0) {
+          setSelectedScreen(sources[0])
+        }
       }
+    } catch (error) {
+      console.error('Error getting desktop sources:', error)
+    }
+  }, [selectedScreen])
 
-      const screenSource = sources[1]
+  useEffect(() => {
+    getAvailableScreens()
+  }, [getAvailableScreens])
+
+  const startRecording = async (): Promise<void> => {
+    if (!window.electronAPI) {
+      console.error('electronAPI is not available.')
+      return
+    }
+
+    if (!selectedScreen) {
+      console.error('No screen selected for recording.')
+      return
+    }
+
+    try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         audio: {
           mandatory: {
             chromeMediaSource: 'desktop',
-            chromeMediaSourceId: screenSource.id
+            chromeMediaSourceId: selectedScreen.id
           }
         } as MediaTrackConstraints & DesktopCaptureConstraints,
         video: {
           mandatory: {
             chromeMediaSource: 'desktop',
-            chromeMediaSourceId: screenSource.id
+            chromeMediaSourceId: selectedScreen.id
           }
         } as MediaTrackConstraints & DesktopCaptureConstraints
       })
@@ -210,7 +238,11 @@ Summary: ${result.summaryPath}`)
     hasVideo: !!currentBlobRef.current,
     videoRef,
     previewVideoRef,
+    availableScreens,
+    selectedScreen,
     setRecordingType,
+    setSelectedScreen,
+    getAvailableScreens,
     startRecording,
     stopRecording,
     downloadVideo,

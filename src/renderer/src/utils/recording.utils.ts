@@ -1,6 +1,6 @@
 import React from 'react'
 import { RecordingType } from '../types'
-import { UsersIcon, GraduationCapIcon, MonitorIcon } from '../components/icons'
+import { UserIcon, GraduationIcon, MonitorIcon } from '../components/icons'
 
 /**
  * Get the appropriate icon for a recording type
@@ -8,9 +8,9 @@ import { UsersIcon, GraduationCapIcon, MonitorIcon } from '../components/icons'
 export const getRecordingTypeIcon = (type: RecordingType): React.JSX.Element => {
   switch (type) {
     case RecordingType.GOOGLE_MEET:
-      return React.createElement(UsersIcon)
+      return React.createElement(UserIcon)
     case RecordingType.LESSON:
-      return React.createElement(GraduationCapIcon)
+      return React.createElement(GraduationIcon)
     case RecordingType.VIDEO:
       return React.createElement(MonitorIcon)
   }

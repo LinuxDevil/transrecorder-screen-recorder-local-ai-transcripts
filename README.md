@@ -1,18 +1,22 @@
-# Screen Recorder
+# Meeting Video Transrecorder
 
 ![Application Icon](./resources/icon.png)
-A powerful desktop screen recording application built with Electron, React, and TypeScript. Record your screen, save videos locally, and automatically generate transcripts and summaries using Ollama.
 
-## Features
+A powerful desktop application for recording meetings, lectures, and presentations with automatic transcript generation and AI-powered summarization. Built with Electron, React, and TypeScript.
 
-- **Screen Recording**: Capture your entire screen or specific windows
-- **Video Download**: Save recordings to your desktop with organized folders
-- **Audio Extraction**: Extract audio from recorded videos automatically
-- **Transcript Generation**: Convert video audio to text using speech recognition
-- **AI Summarization**: Generate intelligent summaries using Ollama (local AI)
-- **Multiple Recording Types**: Support for Google Meet, Lesson, and general video recordings
-- **Live Preview**: See what you're recording in real-time
-- **Cross-Platform**: Works on Windows, macOS, and Linux
+## ✨ Features
+
+- **🎥 Screen Recording** - Capture your entire screen or specific windows
+- **📁 Smart File Organization** - Automatically saves to organized folders with timestamps
+- **🎵 Audio Extraction** - Extracts audio from recorded videos for processing
+- **📝 AI Transcript Generation** - Converts speech to text using local AI models
+- **🤖 Intelligent Summarization** - Generates context-aware summaries using Ollama
+- **🎯 Multiple Recording Types** - Optimized for Google Meet, Lessons, and general videos
+- **👀 Live Preview** - See what you're recording in real-time
+- **🔄 Cross-Platform** - Works seamlessly on Windows, macOS, and Linux
+- **🔒 Privacy-First** - All processing happens locally, no data sent to external servers
+
+## 📸 Screenshots
 
 ### Main Application Interface
 
@@ -22,282 +26,270 @@ A powerful desktop screen recording application built with Electron, React, and 
 
 ![Recording in Progress](./2.png)
 
-## Prerequisites
+## 🚀 Quick Start
 
-Before running this application, you'll need to install some dependencies:
+### Download Pre-built Binaries
 
-### Required Software
+The fastest way to get started:
 
-1. **Node.js** (v16 or higher)
-2. **Python** (v3.8 or higher) - for audio processing
-3. **FFmpeg** - for video/audio conversion
+1. **Visit [Releases](https://github.com/LinuxDevil/MeetingVideo-Transrecorder/releases)**
+2. **Download for your platform:**
+   - **Windows**: `meetingvideo-transrecorder-1.0.0-setup.exe`
+   - **macOS**: `meetingvideo-transrecorder-1.0.0.dmg`
+3. **Install and launch the application**
+
+### Build from Source
+
+For developers or those who need the latest features:
+
+```bash
+# Clone the repository
+git clone https://github.com/LinuxDevil/MeetingVideo-Transrecorder
+cd meetingvideo-transrecorder
+
+# Install dependencies
+npm install
+pip install -r requirements.txt
+
+# Start development server
+npm run dev
+```
+
+## 📋 Requirements
+
+### Essential Dependencies
+
+| Component   | Version | Purpose                |
+| ----------- | ------- | ---------------------- |
+| **Node.js** | 16+     | Runtime environment    |
+| **Python**  | 3.8+    | Audio processing       |
+| **FFmpeg**  | Latest  | Video/audio conversion |
 
 ### Optional (for AI features)
 
-4. **Ollama** - for AI-powered summaries
-5. **Python packages** - for speech-to-text conversion
+| Component           | Purpose                          |
+| ------------------- | -------------------------------- |
+| **Ollama**          | Local AI model for summarization |
+| **Python packages** | Speech-to-text processing        |
 
-## Installation
+## 🛠️ Installation Guide
 
-### Option 1: Download Pre-built Binaries
+### FFmpeg Setup
 
-The easiest way to get started is to download the pre-built binaries:
-
-1. **Go to the [Releases page](https://github.com/LinuxDevil/MeetingVideo-Transrecorder/releases)**
-2. **Download the appropriate installer for your platform:**
-   - **Windows**: `meetingvideo-transrecorder-1.0.0-setup.exe`
-   - **macOS**: `meetingvideo-transrecorder-1.0.0.dmg`
-3. **Install and run the application**
-
-### Option 2: Build from Source
-
-If you prefer to build from source or need the latest development version:
-
-#### 1. Clone the Repository
-
-```bash
-git clone https://github.com/LinuxDevil/MeetingVideo-Transrecorder
-cd meetingvideo-transrecorder
-```
-
-### 2. Install Dependencies
-
-```bash
-npm install
-```
-
-### 3. Install Python Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Install FFmpeg
-
-FFmpeg is required for audio extraction from videos. Here's how to install it:
+FFmpeg is required for audio extraction. Choose your platform:
 
 #### Windows
 
-**Option 1: Using Chocolatey (Recommended)**
-
 ```bash
-# Install Chocolatey first if you don't have it
-# Then install FFmpeg:
+# Using Chocolatey (recommended)
 choco install ffmpeg
-```
 
-**Option 2: Manual Installation**
-
-1. Download from https://ffmpeg.org/download.html
-2. Extract to a folder (e.g., `C:\ffmpeg`)
-3. Add to PATH: `C:\ffmpeg\bin`
-
-**Option 3: Using Scoop**
-
-```bash
+# Using Scoop
 scoop install ffmpeg
+
+# Manual installation
+# Download from https://ffmpeg.org/download.html
+# Extract to C:\ffmpeg and add C:\ffmpeg\bin to PATH
 ```
 
 #### macOS
 
-**Using Homebrew:**
-
 ```bash
+# Using Homebrew
 brew install ffmpeg
+
+# Manual installation
+# Download from https://ffmpeg.org/download.html
+# Extract to /usr/local/bin/
 ```
-
-**Manual Installation:**
-
-1. Download from https://ffmpeg.org/download.html
-2. Extract and move to `/usr/local/bin/`
 
 #### Linux
 
-**Ubuntu/Debian:**
-
 ```bash
-sudo apt update
-sudo apt install ffmpeg
-```
+# Ubuntu/Debian
+sudo apt update && sudo apt install ffmpeg
 
-**CentOS/RHEL:**
-
-```bash
+# CentOS/RHEL
 sudo yum install ffmpeg
-```
 
-**Arch Linux:**
-
-```bash
+# Arch Linux
 sudo pacman -S ffmpeg
 ```
 
-### 5. Install Ollama (Optional)
+### Ollama Setup (Optional)
 
-For AI-powered summaries, install Ollama:
-
-1. **Download Ollama**: Visit https://ollama.ai/ and download for your platform
-2. **Start Ollama**: Run `ollama serve` in a terminal
-3. **Pull a Model**:
+For AI-powered summaries:
 
 ```bash
+# 1. Download from https://ollama.ai/
+# 2. Start Ollama service
+ollama serve
+
+# 3. Pull the required model
 ollama pull mistral
-```
 
-### 6. Verify Installation
-
-Run these commands to verify everything is installed:
-
-```bash
-# Check Node.js
-node --version
-
-# Check Python
-python --version
-
-# Check FFmpeg
-ffmpeg -version
-
-# Check Ollama (if installed)
+# 4. Verify installation
 ollama list
 ```
 
-## Development
+### Verification
 
-### Start Development Server
-
-```bash
-npm run dev
-```
-
-This will start the Electron application in development mode with hot reloading.
-
-### Build for Production
+Ensure everything is installed correctly:
 
 ```bash
-# For Windows
-npm run build:win
-
-# For macOS
-npm run build:mac
-
-# For Linux
-npm run build:linux
+# Check all dependencies
+node --version
+python --version
+ffmpeg -version
+ollama list  # if installed
 ```
 
-## Usage
+## 🎯 Usage
 
-### Basic Recording
+### Basic Recording Workflow
 
-1. **Start the Application**: Run `npm run dev` or launch the built application
-2. **Select Recording Type**: Choose between Google Meet, Lesson, or Video
-3. **Start Recording**: Click the "Start Recording" button
-4. **Stop Recording**: Click "Stop Recording" when finished
-5. **Download Video**: Click "Download Video" to save to your desktop
+1. **Launch the application**
+2. **Select recording type** (Google Meet, Lesson, or Video)
+3. **Click "Start Recording"**
+4. **Present your content**
+5. **Click "Stop Recording"**
+6. **Download your video**
 
 ### Advanced Features
 
 #### Transcript Generation
 
-After recording a video:
+After recording:
 
-1. Click "Extract Transcript"
-2. The app will extract audio from your video using FFmpeg
-3. Convert speech to text using local AI (Whisper or Google Speech Recognition)
-4. Generate a summary based on your recording type using Ollama
-5. Save both transcript and summary files
+1. **Click "Extract Transcript"**
+2. **Wait for processing** (audio extraction + speech recognition)
+3. **Review the transcript** and AI-generated summary
+4. **Files are saved** to your desktop automatically
 
 #### File Organization
 
-Videos are automatically organized:
+Your recordings are automatically organized:
 
 ```
 Desktop/
 └── captured-videos/
-    └── YYYY-MM-DD/
-        ├── recording-YYYY-MM-DD-HH-MM-SS.webm
-        ├── recording-YYYY-MM-DD-HH-MM-SS.txt
-        └── recording-YYYY-MM-DD-HH-MM-SS-summary.txt
+    └── 2024-01-15/
+        ├── recording-2024-01-15-14-30-25.webm
+        ├── recording-2024-01-15-14-30-25.txt
+        └── recording-2024-01-15-14-30-25-summary.txt
 ```
 
-## Configuration
+## ⚙️ Configuration
 
 ### Recording Types
 
-- **Google Meet**: Optimized for meeting recordings with action items and decisions
-- **Lesson**: Designed for educational content with learning objectives and key concepts
-- **Video**: General purpose for any type of video content
+| Type            | Purpose             | Summary Focus                               |
+| --------------- | ------------------- | ------------------------------------------- |
+| **Google Meet** | Meeting recordings  | Action items, decisions, assignments        |
+| **Lesson**      | Educational content | Learning objectives, key concepts, homework |
+| **Video**       | General content     | Main points, highlights, insights           |
 
-### AI Models
+### AI Model Configuration
 
-The application uses the Mistral model for AI summaries. You can change this in `src/main/utils/ollama.utils.ts`:
+Change the AI model in `src/main/utils/ollama.utils.ts`:
 
 ```typescript
 model: 'mistral' // Change to any model you have installed
 ```
 
-### Speech-to-Text Options
+### Speech-to-Text Engines
 
-The app supports multiple STT engines:
+The app supports multiple STT options:
 
 1. **OpenAI Whisper** (Local) - Default, works offline
 2. **Google Speech Recognition** (Online) - Fallback option
 3. **Fallback** - Simple text if other options fail
 
-## Troubleshooting
+## 🔧 Development
+
+### Development Server
+
+```bash
+npm run dev
+```
+
+### Building for Production
+
+```bash
+# Windows
+npm run build:win
+
+# macOS
+npm run build:mac
+
+# Linux
+npm run build:linux
+```
+
+## 🐛 Troubleshooting
 
 ### Common Issues
 
-#### "FFmpeg is not installed"
+#### FFmpeg Not Found
 
-- Install FFmpeg following the installation instructions above
-- Ensure it's added to your system PATH
-- Test with: `ffmpeg -version`
+```bash
+# Verify installation
+ffmpeg -version
 
-#### "Ollama API error: 404 Not Found"
+# Add to PATH if needed
+# Windows: Add C:\ffmpeg\bin to system PATH
+# macOS/Linux: Ensure it's in /usr/local/bin/
+```
 
-- Make sure Ollama is running: `ollama serve`
-- Check available models: `ollama list`
-- Pull the required model: `ollama pull mistral`
-- Verify Ollama is accessible: `curl http://localhost:11434/api/tags`
+#### Ollama Connection Issues
 
-#### "Python script not found"
+```bash
+# Start Ollama service
+ollama serve
 
-- Ensure Python is installed and in your PATH
-- Install required packages: `pip install -r requirements.txt`
-- Check that `audio_extractor.py` is in the project root
+# Check available models
+ollama list
 
-#### "No desktop sources found"
+# Pull required model
+ollama pull mistral
+
+# Test connection
+curl http://localhost:11434/api/tags
+```
+
+#### Python Dependencies
+
+```bash
+# Install requirements
+pip install -r requirements.txt
+
+# Verify audio_extractor.py exists
+ls audio_extractor.py
+```
+
+#### Desktop Sources Not Found
 
 - This is normal on first run
 - The app will automatically detect available screens
 - Try refreshing or restarting the application
 
-#### "Audio extraction failed"
-
-- Verify FFmpeg is installed and working
-- Check Python dependencies are installed
-- Ensure the video file is valid
-
 ### Debug Mode
 
-Run with debug logging:
+Run with enhanced logging:
 
 ```bash
 npm run dev -- --debug
 ```
 
-### Manual Setup Script
+### Manual Setup
 
-If you're having trouble with dependencies, run the setup script:
+Use the automated setup script:
 
 ```bash
 python setup.py
 ```
 
-This will check and install required dependencies automatically.
-
-## Project Structure
+## 🏗️ Project Structure
 
 ```
 meetingvideo-transrecorder/
@@ -322,77 +314,62 @@ meetingvideo-transrecorder/
 └── package.json        # Node.js dependencies
 ```
 
-## Contributing
+## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+We welcome contributions! Here's how to get started:
 
-## License
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature-name`
+3. **Make your changes**
+4. **Test thoroughly**
+5. **Submit a pull request**
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+### Development Guidelines
 
-## Support
+- Follow TypeScript best practices
+- Use meaningful commit messages
+- Test on multiple platforms
+- Update documentation as needed
 
-If you encounter any issues:
+## 📄 License
 
-1. Check the troubleshooting section above
-2. Look at the console output for error messages
-3. Ensure all prerequisites are installed
-4. Try running in debug mode
-5. Check the project issues on GitHub
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Continuous Integration
+## 🆘 Support
 
-This project uses GitHub Actions for automated builds and releases:
+### Getting Help
+
+1. **Check the troubleshooting section above**
+2. **Review console output for error messages**
+3. **Ensure all prerequisites are installed**
+4. **Try running in debug mode**
+5. **Check [GitHub Issues](https://github.com/LinuxDevil/MeetingVideo-Transrecorder/issues)**
+
+### Community
+
+- **GitHub Issues**: Report bugs and request features
+- **Discussions**: Ask questions and share ideas
+- **Releases**: Download the latest versions
+
+## 🔄 Continuous Integration
+
+This project uses GitHub Actions for automated builds and releases.
 
 ### Workflows
 
-#### 1. Build Artifacts (`build-artifacts.yml`)
+#### Build Artifacts (`build-artifacts.yml`)
 
-**Triggers:**
+- **Triggers**: Push to `main`, pull requests, manual
+- **Purpose**: Build Windows and macOS versions
+- **Output**: Uploads artifacts for manual download
 
-- Push to `main` branch
-- Pull requests to `main` branch
-- Manual trigger
+#### Build and Release (`build.yml`)
 
-**What it does:**
+- **Triggers**: Tags starting with `v*` (e.g., `v1.0.1`)
+- **Purpose**: Creates GitHub releases with artifacts
+- **Output**: Automatic release with downloadable files
 
-- Builds Windows and macOS versions
-- Uploads artifacts for manual download
-- No automatic releases
-
-**Artifacts:**
-
-- `windows-build` - Windows installer and unpacked files
-- `macos-build` - macOS DMG and unpacked files
-
-#### 2. Build and Release (`build.yml`)
-
-**Triggers:**
-
-- Push of tags starting with `v*` (e.g., `v1.0.1`)
-- Manual trigger
-
-**What it does:**
-
-- Builds Windows and macOS versions
-- Creates a GitHub release
-- Uploads all artifacts to the release
-
-### How to Use
-
-#### For Regular Builds (No Release)
-
-1. **Push to main branch** - Automatically triggers build
-2. **Go to Actions tab** - View build progress
-3. **Download artifacts** - Available after build completes
-
-#### For Releases
-
-**Option 1: Using Release Scripts**
+### Using Release Scripts
 
 **Linux/macOS:**
 
@@ -407,31 +384,12 @@ chmod +x scripts/release.sh
 scripts\release.bat 1.0.1
 ```
 
-**Option 2: Manual Tagging**
+### Manual Builds
 
-```bash
-git tag v1.0.1
-git push origin v1.0.1
-```
-
-#### For Manual Builds
-
-1. **Go to the [Actions tab](https://github.com/LinuxDevil/MeetingVideo-Transrecorder/actions)**
+1. **Go to [Actions](https://github.com/LinuxDevil/MeetingVideo-Transrecorder/actions)**
 2. **Click "Build Artifacts"**
 3. **Click "Run workflow"**
-4. **Select branch and click "Run workflow"**
-
-### Artifacts Location
-
-#### Build Artifacts
-
-- **Actions tab** → Latest workflow run → Artifacts section
-- **Retention**: 30 days
-
-#### Release Artifacts
-
-- **Releases page** → Latest release → Assets section
-- **Retention**: Permanent (until release is deleted)
+4. **Select branch and run**
 
 ### Build Matrix
 
@@ -440,78 +398,19 @@ git push origin v1.0.1
 | Windows  | `windows-latest` | `npm run build:win` | `.exe`, `win-unpacked/` |
 | macOS    | `macos-latest`   | `npm run build:mac` | `.dmg`, `mac/`          |
 
-### Dependencies Installed
+### Artifacts
 
-#### All Platforms
+- **Build Artifacts**: Available in Actions tab (30-day retention)
+- **Release Artifacts**: Available on Releases page (permanent)
 
-- Node.js 18
-- Python 3.9
-- npm dependencies
-- Python requirements
+### Recent Updates
 
-#### Platform-Specific
+- ✅ **Modular Architecture** - Refactored for better maintainability
+- ✅ **CSS Refactoring** - Improved styling with @apply directives
+- ✅ **GitHub Actions** - Automated builds and releases
+- ✅ **Cross-platform Support** - Windows and macOS builds
+- ✅ **AI Integration** - Local AI-powered summarization
 
-- **Windows**: FFmpeg (via Chocolatey)
-- **macOS**: FFmpeg (via Homebrew)
+---
 
-### Troubleshooting
-
-#### Build Fails
-
-1. **Check Actions logs** - Look for specific error messages
-2. **Verify dependencies** - Ensure all required software is available
-3. **Check file paths** - Ensure all files are in expected locations
-
-#### Artifacts Not Available
-
-1. **Wait for completion** - Builds take 5-10 minutes
-2. **Check retention** - Artifacts expire after 30 days
-3. **Re-run workflow** - Manual trigger if needed
-
-#### Release Not Created
-
-1. **Check tag format** - Must start with `v` (e.g., `v1.0.1`)
-2. **Verify permissions** - Need write access to repository
-3. **Check workflow** - Ensure `build.yml` is enabled
-
-### Customization
-
-#### Adding Linux Builds
-
-Add to matrix in `build-artifacts.yml`:
-
-```yaml
-strategy:
-  matrix:
-    os: [windows-latest, macos-latest, ubuntu-latest]
-```
-
-#### Changing Node.js Version
-
-Update in workflow:
-
-```yaml
-- name: Setup Node.js
-  uses: actions/setup-node@v4
-  with:
-    node-version: '20' # Change version here
-```
-
-#### Adding Code Signing
-
-Add to workflow before build step:
-
-```yaml
-- name: Setup Code Signing
-  uses: electron-userland/electron-builder-action@v1
-  with:
-    github-token: ${{ secrets.GITHUB_TOKEN }}
-    platform: ${{ matrix.os }}
-```
-
-### Security Notes
-
-- **No code signing** - Builds are not signed by default
-- **Public artifacts** - Anyone can download build artifacts
-- **Token permissions** - Uses `GITHUB_TOKEN` for releases
-- **Dependency scanning** - Consider adding security scanning workflows
+**Made with ❤️ by [LinuxDevil](https://github.com/LinuxDevil)**

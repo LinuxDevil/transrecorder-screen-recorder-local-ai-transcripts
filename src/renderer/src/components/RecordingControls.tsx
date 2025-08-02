@@ -1,5 +1,5 @@
 import React from 'react'
-import { RecordingType } from '../types'
+import { RecordingType, DesktopSource } from '../types'
 import { getRecordingTypeIcon, getRecordingTypeLabel } from '../utils/recording.utils'
 import { getButtonClasses } from '../utils/ui.utils'
 import { PlayIcon, SquareIcon, DownloadIcon, FileTextIcon, LoaderIcon, VideoIcon } from './icons'
@@ -10,6 +10,7 @@ interface RecordingControlsProps {
   isProcessingTranscript: boolean
   hasVideo: boolean
   recordingType: RecordingType
+  selectedScreen: DesktopSource | null
   onRecordingTypeChange: (type: RecordingType) => void
   onStartRecording: () => void
   onStopRecording: () => void
@@ -23,6 +24,7 @@ export const RecordingControls: React.FC<RecordingControlsProps> = ({
   isProcessingTranscript,
   hasVideo,
   recordingType,
+  selectedScreen,
   onRecordingTypeChange,
   onStartRecording,
   onStopRecording,
@@ -68,8 +70,9 @@ export const RecordingControls: React.FC<RecordingControlsProps> = ({
         <div className="controls-buttons">
           <button
             onClick={onStartRecording}
-            disabled={isRecording}
-            className={getButtonClasses('danger', isRecording)}
+            disabled={isRecording || !selectedScreen}
+            className={getButtonClasses('danger', isRecording || !selectedScreen)}
+            title={!selectedScreen ? 'Please select a screen to record' : undefined}
           >
             {isRecording ? (
               <>

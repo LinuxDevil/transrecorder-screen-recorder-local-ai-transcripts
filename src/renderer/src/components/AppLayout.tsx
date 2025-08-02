@@ -4,7 +4,8 @@ import { RecordingControls } from './RecordingControls'
 import { StatusMessages } from './StatusMessages'
 import { RecordingStatus } from './RecordingStatus'
 import { VideoPreview } from './VideoPreview'
-import { RecordingType } from '../types'
+import { ScreenSelector } from './ScreenSelector'
+import { RecordingType, DesktopSource } from '../types'
 
 interface AppLayoutProps {
   isRecording: boolean
@@ -18,7 +19,11 @@ interface AppLayoutProps {
   videoRef: React.RefObject<HTMLVideoElement | null>
   stream: MediaStream | null
   recordedVideo: string | null
+  availableScreens: DesktopSource[]
+  selectedScreen: DesktopSource | null
   onRecordingTypeChange: (type: RecordingType) => void
+  onScreenSelect: (screen: DesktopSource | null) => void
+  onRefreshScreens: () => Promise<void>
   onStartRecording: () => Promise<void>
   onStopRecording: () => void
   onDownloadVideo: () => Promise<void>
@@ -37,7 +42,11 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
   videoRef,
   stream,
   recordedVideo,
+  availableScreens,
+  selectedScreen,
   onRecordingTypeChange,
+  onScreenSelect,
+  onRefreshScreens,
   onStartRecording,
   onStopRecording,
   onDownloadVideo,
@@ -48,12 +57,20 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
       <div className="app-content">
         <Header />
 
+        <ScreenSelector
+          availableScreens={availableScreens}
+          selectedScreen={selectedScreen}
+          onScreenSelect={onScreenSelect}
+          onRefreshScreens={onRefreshScreens}
+        />
+
         <RecordingControls
           isRecording={isRecording}
           isSaving={isSaving}
           isProcessingTranscript={isProcessingTranscript}
           hasVideo={hasVideo}
           recordingType={recordingType}
+          selectedScreen={selectedScreen}
           onRecordingTypeChange={onRecordingTypeChange}
           onStartRecording={onStartRecording}
           onStopRecording={onStopRecording}
