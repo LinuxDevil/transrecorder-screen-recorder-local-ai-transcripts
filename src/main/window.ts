@@ -12,7 +12,7 @@ export function createWindow(): BrowserWindow {
     height: 950,
     show: false,
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon } : {}),
+    icon: icon,
     webPreferences: {
       preload: join(__dirname, '../preload/preload.js'),
       sandbox: false,
@@ -51,7 +51,7 @@ export function createWindow(): BrowserWindow {
  */
 export function initializeApp(): void {
   // Set app user model id for windows
-  electronApp.setAppUserModelId('com.electron')
+  electronApp.setAppUserModelId('com.linuxdevil.meetingvideo-transrecorder')
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.

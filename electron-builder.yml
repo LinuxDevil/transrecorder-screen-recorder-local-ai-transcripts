@@ -1,7 +1,8 @@
-appId: com.electron.app
+appId: com.linuxdevil.meetingvideo-transrecorder
 productName: meetingvideo-transrecorder
 directories:
   buildResources: build
+icon: resources/icon.png
 files:
   - '!**/.vscode/*'
   - '!src/*'
@@ -28,6 +29,7 @@ asarUnpack:
   - resources/**
 win:
   executableName: meetingvideo-transrecorder
+  icon: resources/icon.png
   extraResources:
     - from: 'ffmpeg-bin-windows'
       to: 'ffmpeg-bin-windows'
@@ -38,6 +40,7 @@ nsis:
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
 mac:
+  icon: resources/icon.png
   identity: null
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:
@@ -49,6 +52,7 @@ mac:
 dmg:
   artifactName: ${name}-${version}.${ext}
 linux:
+  icon: resources/icon.png
   target:
     - AppImage
     - snap
