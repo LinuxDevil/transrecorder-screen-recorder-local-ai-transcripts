@@ -94,9 +94,10 @@ setup_windows() {
         echo "import site" >> python-runtime-windows/python._pth
         
         print_success "Windows Python runtime downloaded"
-        print_warning "Note: You'll need to install pip and dependencies manually on Windows:"
-        print_warning "  cd python-runtime-windows && python get-pip.py"
-        print_warning "  Scripts/pip install -r ../requirements.txt"
+        print_warning "Note: To install dependencies on Windows:"
+        print_warning "  cd python-runtime-windows"
+        print_warning "  python get-pip.py"
+        print_warning "  python -m pip install -r ../requirements.txt"
     else
         print_warning "Windows Python runtime already exists, skipping..."
     fi

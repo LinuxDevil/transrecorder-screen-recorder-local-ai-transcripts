@@ -36,7 +36,9 @@ jobs:
           # Install Python dependencies for Windows
           cd python-runtime-windows
           ./python.exe get-pip.py
-          ./Scripts/pip.exe install -r ../requirements.txt
+          # Wait a moment for pip to be properly installed
+          sleep 2
+          ./python.exe -m pip install -r ../requirements.txt
 
       - name: Build Windows application
         run: npm run build:win
