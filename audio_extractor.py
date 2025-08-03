@@ -14,7 +14,7 @@ import speech_recognition as sr
 from pydub import AudioSegment
 import whisper
 
-def extract_audio_from_video(video_path, output_audio_path=None):
+def extract_audio_from_video(video_path, ffmpeg_path, output_audio_path=None):
     """
     Extract audio from video file using ffmpeg
     """
@@ -24,7 +24,7 @@ def extract_audio_from_video(video_path, output_audio_path=None):
             output_audio_path = os.path.join(temp_dir, f"extracted_audio_{os.path.basename(video_path)}.wav")
 
         cmd = [
-            'ffmpeg', '-i', video_path,
+            ffmpeg_path, '-i', video_path,
             '-vn',
             '-acodec', 'pcm_s16le',
             '-ar', '16000',
@@ -91,14 +91,15 @@ def main():
         sys.exit(1)
 
     video_path = sys.argv[1]
-    output_audio_path = sys.argv[2] if len(sys.argv) > 2 else None
+    ffmpeg_path = sys.argv[2]
+    output_audio_path = sys.argv[3] if len(sys.argv) > 3 else None
 
     if not os.path.exists(video_path):
         print(f"Error: Video file '{video_path}' not found", file=sys.stderr)
         sys.exit(1)
 
     print(f"Extracting audio from: {video_path}", file=sys.stderr)
-    audio_path = extract_audio_from_video(video_path, output_audio_path)
+    audio_path = extract_audio_from_video(video_path, ffmpeg_path, output_audio_path)
 
     if audio_path is None:
         print("Failed to extract audio", file=sys.stderr)

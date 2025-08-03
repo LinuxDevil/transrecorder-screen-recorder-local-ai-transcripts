@@ -12,3 +12,9 @@ build
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Binary dependencies (downloaded by setup script)
+python-runtime/
+python-runtime-windows/
+ffmpeg-bin/
+ffmpeg-bin-windows/

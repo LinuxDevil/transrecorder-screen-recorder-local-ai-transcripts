@@ -23,28 +23,26 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
-      - name: Setup Python
+      - name: Setup Python (for setup script)
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
-
-      - name: Install FFmpeg (Windows)
-        if: matrix.os == 'windows-latest'
+      - name: Setup binary dependencies
+        shell: bash
         run: |
-          choco install ffmpeg -y
-          echo "FFmpeg installed successfully"
-
-      - name: Install FFmpeg (macOS)
-        if: matrix.os == 'macos-latest'
-        run: |
-          brew install ffmpeg
-          echo "FFmpeg installed successfully"
+          chmod +x setup-binaries.sh
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+            ./setup-binaries.sh windows
+            cd python-runtime-windows
+            ./python.exe get-pip.py
+            ./Scripts/pip.exe install -r ../requirements.txt
+          else
+            ./setup-binaries.sh macos
+          fi
 
       - name: Build Windows application
         if: matrix.os == 'windows-latest'

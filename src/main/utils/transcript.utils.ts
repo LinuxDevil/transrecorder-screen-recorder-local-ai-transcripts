@@ -50,17 +50,12 @@ export async function extractTranscriptFromVideo(videoPath: string): Promise<str
       console.log('Running Python script to extract audio and transcribe...')
       console.log('Video path:', videoPath)
 
-      // Get the app path for both development and packaged environments
       const appPath = app.isPackaged ? process.resourcesPath : process.cwd()
       
       const possiblePaths = [
-        // For packaged app: resources/audio_extractor.py
         join(appPath, 'audio_extractor.py'),
-        // For development: current working directory
         join(process.cwd(), 'audio_extractor.py'),
-        // Relative to main process directory
         join(__dirname, '../../../audio_extractor.py'),
-        // Try current directory as fallback
         'audio_extractor.py'
       ]
 
@@ -84,17 +79,30 @@ export async function extractTranscriptFromVideo(videoPath: string): Promise<str
         return
       }
 
-      // Find available Python command
-      const pythonCommand = await findPythonCommand()
+      let pythonPath: string
+      let ffmpegPath: string
       
-      if (!pythonCommand) {
-        console.log('No Python command found, using fallback')
-        resolve(generateFallbackTranscript(videoPath))
-        return
+      if (app.isPackaged) {
+        if (process.platform === 'win32') {
+          pythonPath = join(process.resourcesPath, 'python-runtime', 'Scripts', 'python.exe')
+          ffmpegPath = join(process.resourcesPath, 'ffmpeg-bin', 'ffmpeg.exe')
+        } else {
+          pythonPath = join(process.resourcesPath, 'python-runtime', 'bin', 'python3')
+          ffmpegPath = join(process.resourcesPath, 'ffmpeg-bin', 'ffmpeg')
+        }
+      } else {
+        const pythonCommand = await findPythonCommand()
+        if (!pythonCommand) {
+          console.log('No Python command found, using fallback')
+          resolve(generateFallbackTranscript(videoPath))
+          return
+        }
+        pythonPath = pythonCommand
+        ffmpegPath = 'ffmpeg'
       }
-      
-      console.log('Spawning Python process with:', pythonCommand, scriptPath, videoPath)
-      const pythonProcess = spawn(pythonCommand, [scriptPath, videoPath])
+
+      console.log('Spawning Python process with:', pythonPath, scriptPath, videoPath)
+      const pythonProcess = spawn(pythonPath, [scriptPath, videoPath, ffmpegPath])
 
       let stdout = ''
       let stderr = ''

@@ -15,6 +15,7 @@ A powerful desktop application for recording meetings, lectures, and presentatio
 - **👀 Live Preview** - See what you're recording in real-time
 - **🔄 Cross-Platform** - Works seamlessly on Windows, macOS, and Linux
 - **🔒 Privacy-First** - All processing happens locally, no data sent to external servers
+- **⚡ Automated Setup** - One-command setup for all binary dependencies
 
 ## 📸 Screenshots
 
@@ -72,7 +73,77 @@ npm run dev
 | **Ollama**          | Local AI model for summarization |
 | **Python packages** | Speech-to-text processing        |
 
-## 🛠️ Installation Guide
+## 🛠️ Setup Guide
+
+### Automated Setup (Recommended)
+
+The easiest way to set up all binary dependencies:
+
+```bash
+# Setup for current platform (recommended)
+./setup-binaries.sh
+
+# Or setup for all platforms
+./setup-binaries.sh all
+
+# Or setup for specific platform
+./setup-binaries.sh macos 
+./setup-binaries.sh windows
+./setup-binaries.sh linux
+```
+
+### What the Setup Script Does
+
+#### macOS Setup
+- Creates a Python virtual environment in `python-runtime/`
+- Installs all dependencies from `requirements.txt`
+- Downloads FFmpeg binary to `ffmpeg-bin/`
+
+#### Windows Setup
+- Downloads Python embeddable package to `python-runtime-windows/`
+- Sets up pip and prepares for dependency installation
+- Downloads FFmpeg binary to `ffmpeg-bin-windows/`
+
+#### Linux Setup
+- Creates a Python virtual environment in `python-runtime/`
+- Installs all dependencies from `requirements.txt`
+- Downloads static FFmpeg binary to `ffmpeg-bin/`
+
+### Directory Structure After Setup
+
+After running the setup script, you'll have:
+
+```
+├── python-runtime/          # macOS/Linux Python environment
+├── python-runtime-windows/  # Windows Python environment
+├── ffmpeg-bin/             # macOS/Linux FFmpeg binary
+├── ffmpeg-bin-windows/     # Windows FFmpeg binary
+├── audio_extractor.py      # Python script for audio processing
+├── requirements.txt        # Python dependencies
+└── setup-binaries.sh       # Setup script
+```
+
+### Windows Post-Setup
+
+After running the Windows setup, manually install Python dependencies:
+
+```bash
+cd python-runtime-windows
+python get-pip.py
+Scripts/pip install -r ../requirements.txt
+```
+
+### Cross-Platform Builds
+
+- Run `./setup-binaries.sh all` to set up binaries for all platforms
+- Use the appropriate npm script for your target platform:
+  ```bash
+  npm run build:mac 
+  npm run build:win 
+  npm run build:linux
+  ```
+
+## 🛠️ Manual Installation Guide
 
 ### FFmpeg Setup
 
@@ -143,6 +214,59 @@ python --version
 ffmpeg -version
 ollama list  # if installed
 ```
+
+### Setup Troubleshooting
+
+#### "Python not found" error
+- Make sure you've run `./setup-binaries.sh` first
+- Check that the Python runtime was created successfully
+- Verify the paths in `transcript.utils.ts` match your setup
+
+#### "FFmpeg not found" error
+- Ensure FFmpeg was downloaded by the setup script
+- Check that the FFmpeg binary has execute permissions
+- Verify the FFmpeg path is correct for your platform
+
+### Manual Binary Setup (Alternative)
+
+If the automated setup doesn't work, you can manually set up the binaries:
+
+#### Python Runtime
+1. Create a virtual environment: `python3 -m venv python-runtime`
+2. Activate it: `source python-runtime/bin/activate` (macOS/Linux)
+3. Install dependencies: `pip install -r requirements.txt`
+4. Deactivate: `deactivate`
+
+#### FFmpeg
+1. Download from [FFmpeg website](https://ffmpeg.org/download.html)
+2. Extract to `ffmpeg-bin/` directory
+3. Ensure the binary is executable: `chmod +x ffmpeg-bin/ffmpeg`
+
+### Python Dependencies
+
+The app requires these Python packages (from `requirements.txt`):
+- `openai-whisper>=20231117` - For speech-to-text conversion
+- `SpeechRecognition>=3.10.0` - Alternative speech recognition
+- `pydub>=0.25.1` - Audio processing
+- `torch>=2.0.0` - Machine learning backend
+- `numpy>=1.24.0` - Numerical computations
+
+### Important Notes
+
+#### Development vs Production
+
+- **Development mode**: Uses system Python and FFmpeg
+- **Packaged app**: Uses bundled Python runtime and FFmpeg
+
+#### Gitignore
+
+The binary directories are automatically ignored by git:
+- `python-runtime/`
+- `python-runtime-windows/`
+- `ffmpeg-bin/`
+- `ffmpeg-bin-windows/`
+
+This keeps the repository clean while allowing developers to set up their own binaries.
 
 ## 🎯 Usage
 
