@@ -100,9 +100,9 @@ The easiest way to set up all binary dependencies:
 - Downloads FFmpeg binary to `ffmpeg-bin/`
 
 #### Windows Setup
-- Downloads Python embeddable package to `python-runtime-windows/`
-- Sets up pip and prepares for dependency installation
 - Downloads FFmpeg binary to `ffmpeg-bin-windows/`
+- Uses system Python (no bundled runtime needed)
+- Requires `pip install -r requirements.txt` for dependencies
 
 #### Linux Setup
 - Creates a Python virtual environment in `python-runtime/`
@@ -115,7 +115,6 @@ After running the setup script, you'll have:
 
 ```
 ├── python-runtime/          # macOS/Linux Python environment
-├── python-runtime-windows/  # Windows Python environment
 ├── ffmpeg-bin/             # macOS/Linux FFmpeg binary
 ├── ffmpeg-bin-windows/     # Windows FFmpeg binary
 ├── audio_extractor.py      # Python script for audio processing
@@ -123,15 +122,17 @@ After running the setup script, you'll have:
 └── setup-binaries.sh       # Setup script
 ```
 
+Note: Windows builds use system Python, so no `python-runtime-windows/` directory is created.
+
 ### Windows Post-Setup
 
-After running the Windows setup, manually install Python dependencies:
+After running the Windows setup, install Python dependencies using system Python:
 
 ```bash
-cd python-runtime-windows
-python get-pip.py
-Scripts/pip install -r ../requirements.txt
+pip install -r requirements.txt
 ```
+
+No additional setup required - Windows builds use system Python and bundled FFmpeg.
 
 ### Cross-Platform Builds
 
@@ -231,7 +232,7 @@ ollama list  # if installed
 
 If the automated setup doesn't work, you can manually set up the binaries:
 
-#### Python Runtime
+#### Python Runtime (macOS/Linux only)
 1. Create a virtual environment: `python3 -m venv python-runtime`
 2. Activate it: `source python-runtime/bin/activate` (macOS/Linux)
 3. Install dependencies: `pip install -r requirements.txt`
@@ -239,8 +240,14 @@ If the automated setup doesn't work, you can manually set up the binaries:
 
 #### FFmpeg
 1. Download from [FFmpeg website](https://ffmpeg.org/download.html)
-2. Extract to `ffmpeg-bin/` directory
-3. Ensure the binary is executable: `chmod +x ffmpeg-bin/ffmpeg`
+2. Extract to `ffmpeg-bin/` directory (macOS/Linux) or `ffmpeg-bin-windows/` (Windows)
+3. Ensure the binary is executable: `chmod +x ffmpeg-bin/ffmpeg` (macOS/Linux)
+
+#### Windows Note
+Windows builds rely on system Python, so just ensure Python 3.8+ is installed and run:
+```bash
+pip install -r requirements.txt
+```
 
 ### Python Dependencies
 
@@ -255,16 +262,17 @@ The app requires these Python packages (from `requirements.txt`):
 
 #### Development vs Production
 
-- **Development mode**: Uses system Python and FFmpeg
-- **Packaged app**: Uses bundled Python runtime and FFmpeg
+- **Development mode**: Uses system Python and FFmpeg on all platforms
+- **Packaged app**: 
+  - macOS/Linux: Uses bundled Python runtime and FFmpeg
+  - Windows: Uses system Python + bundled FFmpeg
 
 #### Gitignore
 
 The binary directories are automatically ignored by git:
-- `python-runtime/`
-- `python-runtime-windows/`
-- `ffmpeg-bin/`
-- `ffmpeg-bin-windows/`
+- `python-runtime/` (macOS/Linux only)
+- `ffmpeg-bin/` (macOS/Linux)
+- `ffmpeg-bin-windows/` (Windows)
 
 This keeps the repository clean while allowing developers to set up their own binaries.
 

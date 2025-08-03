@@ -75,34 +75,8 @@ setup_macos() {
 setup_windows() {
     print_status "Setting up Windows binaries..."
     
-    if [ ! -d "python-runtime-windows" ]; then
-        print_status "Downloading Python embeddable for Windows..."
-        mkdir -p python-runtime-windows
-        
-        PYTHON_VERSION="3.11.9"
-        curl -L -o python-windows.zip "https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-embed-amd64.zip"
-        cd python-runtime-windows
-        unzip -o ../python-windows.zip
-        cd ..
-        rm python-windows.zip
-        
-        curl -L -o python-runtime-windows/get-pip.py "https://bootstrap.pypa.io/get-pip.py"
-        
-        # Configure python._pth to include Scripts directory and enable site-packages
-        echo "python311.zip" > python-runtime-windows/python._pth
-        echo "." >> python-runtime-windows/python._pth
-        echo "Scripts" >> python-runtime-windows/python._pth
-        echo "Lib/site-packages" >> python-runtime-windows/python._pth
-        echo "import site" >> python-runtime-windows/python._pth
-        
-        print_success "Windows Python runtime downloaded"
-        print_warning "Note: To install dependencies on Windows:"
-        print_warning "  cd python-runtime-windows"
-        print_warning "  python get-pip.py"
-        print_warning "  Scripts/pip install -r ../requirements.txt"
-    else
-        print_warning "Windows Python runtime already exists, skipping..."
-    fi
+    # For Windows, we only need FFmpeg - Python will be provided by the system/CI
+    print_status "Windows builds use system Python - only setting up FFmpeg..."
     
     if [ ! -d "ffmpeg-bin-windows" ]; then
         print_status "Downloading FFmpeg for Windows..."
@@ -115,6 +89,9 @@ setup_windows() {
     else
         print_warning "Windows FFmpeg already exists, skipping..."
     fi
+    
+    print_success "Windows setup complete - uses system Python + bundled FFmpeg"
+    print_warning "Note: Windows builds rely on system Python and pip install requirements.txt"
 }
 
 setup_linux() {

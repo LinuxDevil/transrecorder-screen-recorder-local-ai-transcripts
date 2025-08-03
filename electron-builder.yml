@@ -29,12 +29,8 @@ asarUnpack:
 win:
   executableName: meetingvideo-transrecorder
   extraResources:
-    # Windows-specific binaries (if available)
-    - from: 'python-runtime-windows'
-      to: 'python-runtime'
-      filter: '**/*'
     - from: 'ffmpeg-bin-windows'
-      to: 'ffmpeg-bin'
+      to: 'ffmpeg-bin-windows'
       filter: '**/*'
 nsis:
   artifactName: ${name}-${version}-setup.${ext}

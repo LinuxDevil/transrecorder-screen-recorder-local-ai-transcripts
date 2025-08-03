@@ -10,19 +10,19 @@ import { generateFallbackTranscript } from './file.utils'
  */
 function findPythonCommand(): Promise<string | null> {
   const commands = ['python3', 'python', 'py']
-  
+
   return new Promise((resolve) => {
     let index = 0
-    
+
     function tryNext() {
       if (index >= commands.length) {
         resolve(null)
         return
       }
-      
+
       const cmd = commands[index++]
       const testProcess = spawn(cmd, ['--version'], { stdio: 'pipe' })
-      
+
       testProcess.on('close', (code) => {
         if (code === 0) {
           console.log(`Found Python command: ${cmd}`)
@@ -31,12 +31,12 @@ function findPythonCommand(): Promise<string | null> {
           tryNext()
         }
       })
-      
+
       testProcess.on('error', () => {
         tryNext()
       })
     }
-    
+
     tryNext()
   })
 }
@@ -51,7 +51,7 @@ export async function extractTranscriptFromVideo(videoPath: string): Promise<str
       console.log('Video path:', videoPath)
 
       const appPath = app.isPackaged ? process.resourcesPath : process.cwd()
-      
+
       const possiblePaths = [
         join(appPath, 'audio_extractor.py'),
         join(process.cwd(), 'audio_extractor.py'),
@@ -81,11 +81,13 @@ export async function extractTranscriptFromVideo(videoPath: string): Promise<str
 
       let pythonPath: string
       let ffmpegPath: string
-      
+
       if (app.isPackaged) {
+        // Use bundled Python and FFmpeg
         if (process.platform === 'win32') {
-          pythonPath = join(process.resourcesPath, 'python-runtime', 'Scripts', 'python.exe')
-          ffmpegPath = join(process.resourcesPath, 'ffmpeg-bin', 'ffmpeg.exe')
+          // Windows uses system Python, not bundled Python runtime
+          pythonPath = 'python' // Use system Python
+          ffmpegPath = join(process.resourcesPath, 'ffmpeg-bin-windows', 'ffmpeg.exe')
         } else {
           pythonPath = join(process.resourcesPath, 'python-runtime', 'bin', 'python3')
           ffmpegPath = join(process.resourcesPath, 'ffmpeg-bin', 'ffmpeg')

@@ -37,18 +37,8 @@ jobs:
           chmod +x setup-binaries.sh
           if [ "${{ matrix.os }}" = "windows-latest" ]; then
             ./setup-binaries.sh windows
-            # Install Python dependencies for Windows
-            cd python-runtime-windows
-            # Fix the python._pth file to include Scripts directory
-            echo "python311.zip" > python._pth
-            echo "." >> python._pth
-            echo "Scripts" >> python._pth
-            echo "Lib/site-packages" >> python._pth
-            echo "import site" >> python._pth
-            # Install pip
-            ./python.exe get-pip.py
-            # Install dependencies using the Scripts/pip.exe directly
-            ./Scripts/pip.exe install -r ../requirements.txt
+            # Install Python dependencies using system Python
+            pip install -r requirements.txt
           else
             ./setup-binaries.sh macos
           fi
