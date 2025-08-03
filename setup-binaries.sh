@@ -88,8 +88,10 @@ setup_windows() {
         
         curl -L -o python-runtime-windows/get-pip.py "https://bootstrap.pypa.io/get-pip.py"
         
+        # Configure python._pth to include Scripts directory and enable site-packages
         echo "python311.zip" > python-runtime-windows/python._pth
         echo "." >> python-runtime-windows/python._pth
+        echo "Scripts" >> python-runtime-windows/python._pth
         echo "Lib/site-packages" >> python-runtime-windows/python._pth
         echo "import site" >> python-runtime-windows/python._pth
         
@@ -97,7 +99,7 @@ setup_windows() {
         print_warning "Note: To install dependencies on Windows:"
         print_warning "  cd python-runtime-windows"
         print_warning "  python get-pip.py"
-        print_warning "  python -m pip install -r ../requirements.txt"
+        print_warning "  Scripts/pip install -r ../requirements.txt"
     else
         print_warning "Windows Python runtime already exists, skipping..."
     fi
