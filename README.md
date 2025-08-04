@@ -1,8 +1,8 @@
-# Meeting Video Transrecorder
+# Transrecorder – Screen Recorder with Local AI Transcripts & Summaries
 
 ![Application Icon](./resources/icon.png)
 
-A powerful desktop application for recording meetings, lectures, and presentations with automatic transcript generation and AI-powered summarization. Built with Electron, React, and TypeScript.
+An open-source desktop screen recorder built with Electron, React, and TypeScript. Capture your screen, save videos locally, and auto-generate transcripts and AI summaries using Ollama — all offline, privacy-first, and fully customizable.
 
 ## ✨ Features
 
