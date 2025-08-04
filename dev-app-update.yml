@@ -1,3 +1,3 @@
 provider: generic
 url: https://example.com/auto-updates
-updaterCacheDirName: meetingvideo-transrecorder-updater
+updaterCacheDirName: transrecorder-screen-recorder-local-ai-transcripts-updater

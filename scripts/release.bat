@@ -1,5 +1,5 @@
 @echo off
-REM Release script for Meeting Video Transrecorder (Windows)
+REM Release script for ScreenRec AI – Local Screen Recorder with Transcription & Summarization (Windows)
 REM Usage: scripts\release.bat <version>
 REM Example: scripts\release.bat 1.0.1
 
@@ -40,7 +40,7 @@ echo    2. Create a GitHub release
 echo    3. Upload all artifacts to the release
 echo.
 echo 📋 You can monitor the progress at:
-echo    https://github.com/LinuxDevil/MeetingVideo-Transrecorder/actions
+echo    https://github.com/LinuxDevil/transrecorder-screen-recorder-local-ai-transcripts/actions
 echo.
 echo 📦 Once complete, users can download from:
-echo    https://github.com/LinuxDevil/MeetingVideo-Transrecorder/releases
+echo    https://github.com/LinuxDevil/transrecorder-screen-recorder-local-ai-transcripts/releases

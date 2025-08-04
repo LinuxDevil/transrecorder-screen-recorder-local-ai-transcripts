@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Setup script for MeetingVideo-Transrecorder
+# Setup script for transrecorder-screen-recorder-local-ai-transcripts
 # Downloads and configures Python runtime and FFmpeg for macOS and Windows
 
 set -e  # Exit on any error
 
-echo "🚀 Setting up MeetingVideo-Transrecorder binaries..."
+echo "🚀 Setting up transrecorder-screen-recorder-local-ai-transcripts binaries..."
 echo "================================================="
 
 # Colors for output
@@ -45,7 +45,7 @@ print_status "Detected platform: $PLATFORM"
 
 setup_macos() {
     print_status "Setting up macOS binaries..."
-    
+
     if [ ! -d "python-runtime" ]; then
         print_status "Creating Python virtual environment for macOS..."
         python3 -m venv python-runtime
@@ -57,7 +57,7 @@ setup_macos() {
     else
         print_warning "macOS Python runtime already exists, skipping..."
     fi
-    
+
     if [ ! -d "ffmpeg-bin" ]; then
         print_status "Downloading FFmpeg for macOS..."
         mkdir -p ffmpeg-bin
@@ -74,10 +74,10 @@ setup_macos() {
 
 setup_windows() {
     print_status "Setting up Windows binaries..."
-    
+
     # For Windows, we only need FFmpeg - Python will be provided by the system/CI
     print_status "Windows builds use system Python - only setting up FFmpeg..."
-    
+
     if [ ! -d "ffmpeg-bin-windows" ]; then
         print_status "Downloading FFmpeg for Windows..."
         mkdir -p ffmpeg-bin-windows
@@ -89,14 +89,14 @@ setup_windows() {
     else
         print_warning "Windows FFmpeg already exists, skipping..."
     fi
-    
+
     print_success "Windows setup complete - uses system Python + bundled FFmpeg"
     print_warning "Note: Windows builds rely on system Python and pip install requirements.txt"
 }
 
 setup_linux() {
     print_status "Setting up Linux binaries..."
-    
+
     if [ ! -d "python-runtime" ]; then
         print_status "Creating Python virtual environment for Linux..."
         python3 -m venv python-runtime
@@ -108,7 +108,7 @@ setup_linux() {
     else
         print_warning "Linux Python runtime already exists, skipping..."
     fi
-    
+
     if [ ! -d "ffmpeg-bin" ]; then
         print_status "Downloading static FFmpeg for Linux..."
         mkdir -p ffmpeg-bin

@@ -1,5 +1,5 @@
-appId: com.linuxdevil.meetingvideo-transrecorder
-productName: meetingvideo-transrecorder
+appId: com.linuxdevil.transrecorder-screen-recorder-local-ai-transcripts
+productName: transrecorder-screen-recorder-local-ai-transcripts
 directories:
   buildResources: build
 icon: resources/icon.png
@@ -28,7 +28,7 @@ extraResources:
 asarUnpack:
   - resources/**
 win:
-  executableName: meetingvideo-transrecorder
+  executableName: transrecorder-screen-recorder-local-ai-transcripts
   icon: resources/icon.png
   extraResources:
     - from: 'ffmpeg-bin-windows'
